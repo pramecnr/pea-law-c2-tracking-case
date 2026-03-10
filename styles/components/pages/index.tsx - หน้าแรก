@@ -1,0 +1,35 @@
+import React, { useState } from 'react';
+import Head from 'next/head';
+import CaseForm from '../components/CaseForm';
+import CaseList from '../components/CaseList';
+
+export default function Home() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleCaseAdded = () => {
+    setRefreshKey(prev => prev + 1);
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Case Management System - การไฟฟ้าส่วนภูมิภาค</title>
+        <meta name="description" content="ระบบเก็บข้อมูลคดีการไฟฟ้าส่วนภูมิภาค" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <div className="container">
+        <header>
+          <img src="/mea-logo.png" alt="MEA Logo" className="logo" />
+          <div>
+            <h1>ระบบเก็บข้อมูลคดี</h1>
+            <p style={{ color: '#666', margin: '5px 0 0 0' }}>การไฟฟ้าส่วนภูมิภาค</p>
+          </div>
+        </header>
+
+        <CaseForm onCaseAdded={handleCaseAdded} />
+        <CaseList refresh={refreshKey} />
+      </div>
+    </>
+  );
+}
